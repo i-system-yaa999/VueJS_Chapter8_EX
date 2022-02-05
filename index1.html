@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!-- <script src="../../vue.js"></script> -->
+</head>
+<body>
+  <div id="tab">
+    <ul class="tab-menu">
+      <li v-on:click="tabCng(1)" v-bind:class="cngColor1?'black':'white'">タブ1</li>
+      <li v-on:click="tabCng(2)" v-bind:class="cngColor2?'black':'white'">タブ2</li>
+      <li v-on:click="tabCng(3)" v-bind:class="cngColor3?'black':'white'">タブ3</li>
+    </ul>
+    <div class="tab-content">
+      <div v-show="tabIndex===1">コンテンツ1</div>
+      <div v-show="tabIndex===2">コンテンツ2</div>
+      <div v-show="tabIndex===3">コンテンツ3</div>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el:'#tab',
+      data(){
+        return{
+          tabIndex: 1,
+          cngColor1:true,
+          cngColor2:false,
+          cngColor3:false,
+        }
+      },
+    methods:{
+      tabCng:function(index){
+        this.tabIndex=index;
+        this.cngColor1=false;
+        this.cngColor2=false;
+        this.cngColor3=false;
+        switch(index){
+          case 1:
+            this.cngColor1 = true;
+            this.cngColor2 = false;
+            this.cngColor3 = false;
+            break;
+          case 2:
+            this.cngColor1 = false;
+            this.cngColor2 = true;
+            this.cngColor3 = false;
+            break;
+          case 3:
+            this.cngColor1 = false;
+            this.cngColor2 = false;
+            this.cngColor3 = true;
+            break;
+        }
+      },
+    },
+    });
+  </script>
+  <style>
+    .tab-menu{
+      display: flex;
+    }
+    .tab-menu li{
+      width: 100px;
+      border: 1px solid black;
+      list-style: none;
+      text-align: center;
+    }
+    .black{
+      background-color: black;
+      color: white;
+    }
+    .white{
+      background-color: white;
+      color: black;
+    }
+  </style>
+</body>
+</html>

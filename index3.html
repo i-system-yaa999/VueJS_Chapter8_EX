@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!-- <script src="../../vue.js"></script> -->
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="searchkey">
+    <!-- <ul>
+      <li v-for="user in searchUser" :key="user.id">
+        {{user.name}}
+      </li>
+    </ul> -->
+    <table>
+      <tr v-for="user in searchUser" :key="user.id">
+        <td>{{user.name}}</td>
+      </tr>
+    </table>
+  </div>
+</body>
+<script>
+  new Vue({
+    el:'#app',
+    data(){
+      return{
+        searchkey: '',
+        users: [
+          {
+            id: 1,
+            name: '佐藤'
+          },
+          {
+            id: 2,
+            name: '山田'
+          },
+          {
+            id: 3,
+            name: '鈴木'
+          },
+          {
+            id: 4,
+            name: '田中'
+          },
+        ],
+      }
+    },
+    computed:{
+      searchUser(){
+        let ansUsers=[];
+        for(let i in this.users){
+          let chkUser=this.users[i];
+          // alert(chkUser.name);
+          if(chkUser.name.indexOf(this.searchkey) !== -1){
+            ansUsers.push(chkUser);
+          };
+        };
+        // alert(ansUsers.length);
+        return ansUsers;
+      },
+    },
+  });
+</script>
+<style>
+  li{
+    list-style: none;
+  }
+</style>
+</html>
